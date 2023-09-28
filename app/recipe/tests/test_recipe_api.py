@@ -15,7 +15,7 @@ RECIPES_URL = reverse('recipe:recipe-list')
 
 
 def create_recipe(user, **params):
-    default = {
+    defaults = {
         'title': 'Test Recipe',
         'time_minutes': 10,
         'price': Decimal('5.25'),
@@ -23,9 +23,9 @@ def create_recipe(user, **params):
         'link': 'http://example.com/recipe.pdf',
     }
 
-    default.update(params)
+    defaults.update(params)
 
-    recipe = Recipe.objects.create(user=user, **default)
+    recipe = Recipe.objects.create(user=user, **defaults)
     return recipe
 
 
@@ -56,7 +56,7 @@ class PrivateRecipeApiTests(TestCase):
 
         recipes = Recipe.objects.all().order_by('-id')
         serializer = RecipeSerializer(recipes, many=True)
-        self.assert_(res.status_code == status.HTTP_200_OK)
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
         self.assertEqual(res.data, serializer.data)
 
     def test_recipes_list_limited_to_user(self):
