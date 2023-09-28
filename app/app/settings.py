@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     # Apps
     'core.apps.CoreConfig',
     'user.apps.UserConfig',
+    'recipe.apps.RecipeConfig',
     # Libraries
     'rest_framework',
     'rest_framework.authtoken',
@@ -84,11 +85,11 @@ WSGI_APPLICATION = 'app.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-            #Remove OPTIONS
-            "HOST": os.environ.get('DB_HOST'),
-            "NAME": os.environ.get('DB_NAME'),
-            "USER": os.environ.get('DB_USER'),
-            "PASSWORD": os.environ.get('DB_PASS'),
+        # Remove OPTIONS
+        "HOST": os.environ.get('DB_HOST'),
+        "NAME": os.environ.get('DB_NAME'),
+        "USER": os.environ.get('DB_USER'),
+        "PASSWORD": os.environ.get('DB_PASS'),
 
     }
 }
