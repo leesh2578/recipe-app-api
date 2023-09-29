@@ -8,8 +8,10 @@ from django.contrib.auth import get_user_model
 
 from core import models
 
+
 def create_user(email='user@example.com', password='testpass123'):
     return get_user_model().objects.create(email=email, password=password)
+
 
 class ModelTest(TestCase):
     def test_create_user_with_email_successful(self):
@@ -69,3 +71,11 @@ class ModelTest(TestCase):
 
         self.assertEqual(str(tag), tag.name)
 
+    def test_create_ingredients(self):
+        user = create_user()
+        ingredient = models.Ingredient.objects.create(
+            user=user,
+            name='Ingredient1'
+        )
+
+        self.assertEqual(str(ingredient), ingredient.name)
