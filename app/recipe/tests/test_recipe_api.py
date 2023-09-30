@@ -335,6 +335,15 @@ class PrivateRecipeApiTests(TestCase):
         self.assertEqual(res.status_code, status.HTTP_200_OK)
         self.assertEqual(recipe.ingredients.count(), 0)
 
+    def test_filter_by_tags(self):
+        r1 = create_recipe(user=self.user, title='Thai vegetable curry')
+        r2 = create_recipe(user=self.user, title='Eggplant with tahini')
+        tag1 = Tag.objects.create(user=self.user, name='Vegan')
+        tag2 = Tag.objects.create(user=self.user, name='Vegetarian')
+        r1.tags.add(tag1)
+        r2.tags.add(tag2)
+        r3 = create_recipe(user=self.user, title='Fish and chips')
+
 
 class ImageUploadTests(TestCase):
     def setUp(self):
